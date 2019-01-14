@@ -11,9 +11,6 @@
      <!-- 踢出用户-->
      <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"></bean>
 
-     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-           <property name="sessionDAO" ref="sessionDAO"></property>
-     </bean>
 
     <!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->
     <!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->
@@ -22,7 +19,6 @@
           <property name="realm" ref="myReal" />
           <!-- 使用下面配置的缓存管理器 -->
           <property name="cacheManager" ref="cacheManager"/>
-          <property name="sessionManager" ref="sessionManager" />
     </bean>
 
 
@@ -46,6 +42,7 @@
         <property name="filterChainDefinitions">
             <value>
 
+                /login = anon
                 /common/**  = anon
 
                 /views/login.jsp  = anon

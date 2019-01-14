@@ -19,16 +19,18 @@
                     <div class="card-header text-center text-uppercase h4 font-weight-light">
                         Login
                     </div>
+                    <form action="/login" type="POST">
+
 
                     <div class="card-body py-5">
                         <div class="form-group">
-                            <label class="form-control-label">Email</label>
-                            <input type="email" class="form-control">
+                            <label class="form-control-label">username</label>
+                            <input name="username" type="text" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Password</label>
-                            <input type="password" class="form-control">
+                            <input name="password" type="password" class="form-control">
                         </div>
 
                         <div class="custom-control custom-checkbox mt-4">
@@ -48,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
