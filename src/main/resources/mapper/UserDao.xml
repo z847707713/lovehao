@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lovehao.dao.UserDao">
+
+    <insert id="insert">
+        INSERT INTO  user
+          (username,
+           password,
+           email,
+           delete_flag)
+          VALUES
+           (
+           #{username},
+           #{password},
+           #{email},
+           #{deleteFlag}
+          )
+    </insert>
+
+    <update id="delete">
+        <if test="id != null and id != 0">
+            UPDATE user SET
+            delete_flag = 1
+            where id = #{id}
+        </if>
+    </update>
+
+    <select id="selectById" resultType="cn.lovehao.entity.User">
+         select * from user where id = #{id}
+    </select>
+
+    <select id="selectByName" resultType="cn.lovehao.entity.User">
+        select * from user where username = #{username}
+    </select>
+</mapper>
