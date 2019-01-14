@@ -6,7 +6,16 @@
      <!-- 缓存管理器 -->
      <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 
-     <bean id="myReal" class="cn.lovehao.shiro.MyRealm" />
+    <bean id="myReal" class="cn.lovehao.shiro.MyRealm" >
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!-- 配置加密算法的名称 -->
+                <property name="hashAlgorithmName" value="MD5"/>
+                <!-- 配置加密的次数 -->
+                <property name="hashIterations" value="1" />
+            </bean>
+        </property>
+    </bean>
 
      <!-- 踢出用户-->
      <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"></bean>
