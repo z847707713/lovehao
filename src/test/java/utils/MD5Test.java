@@ -12,6 +12,5 @@ public class MD5Test {
         int hashIterations = 1;          //加密的次数
         Object result = new SimpleHash(algorithmName, source, salt, hashIterations);
         System.out.println(result);
-
     }
 }

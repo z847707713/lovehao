@@ -1,6 +1,5 @@
 package cn.lovehao.dao;
 
-import cn.lovehao.entity.Student;
 import cn.lovehao.entity.User;
 
 public interface UserDao {
