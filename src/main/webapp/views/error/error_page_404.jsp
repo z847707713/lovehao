@@ -16,8 +16,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
                 <span class="display-1 d-block">404</span>
-                <div class="mb-4">The page you are looking for was not found.</div>
-                <a href="/" class="btn btn-link">Back to Home</a>
+                <div class="mb-4">找不到您要查找的页面。</div>
+                <a href="/" class="btn btn-link">返回主页</a>
             </div>
         </div>
     </div>

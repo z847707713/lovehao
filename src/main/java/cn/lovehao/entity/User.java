@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String email;
     private Boolean deleteFlag;
-
+    private String rememberMe;
 
     public User() {
     }
@@ -54,5 +54,13 @@ public class User {
 
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public String getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(String rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

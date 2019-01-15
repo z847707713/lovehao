@@ -17,10 +17,6 @@
         </property>
     </bean>
 
-     <!-- 踢出用户-->
-     <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"></bean>
-
-
     <!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->
     <!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->
     <!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->
@@ -50,20 +46,18 @@
         <!-- authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter -->
         <property name="filterChainDefinitions">
             <value>
-
                 /login = anon
+                /register = anon
+                #登出
+                /logout = logout
                 /common/**  = anon
-
-                /views/login.jsp  = anon
-                /views/register.jsp  = anon
-
                 # /frame/essay = roles[member]
                 # /views/addBlog.html = roles[admin]
                 # /frame/deleteEssay/** = perms[删除博客]
                 # /frame/deleteEssay/** = roles[admin]
-
                 # 必须放在最后
-                /** = authc
+                /** = user
+                #/** = authc
             </value>
         </property>
     </bean>

@@ -15,7 +15,7 @@ public class LoginController {
         Subject currentUser = SecurityUtils.getSubject();
         if(!currentUser.isAuthenticated()){
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
-            token.setRememberMe(true);
+            token.setRememberMe("on".equals(user.getRememberMe()) ? true : false);
             try{
                 currentUser.login(token);
             }catch (Exception e){

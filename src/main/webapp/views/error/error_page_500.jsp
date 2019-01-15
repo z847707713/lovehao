@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
                 <h1 class="display-1">500</h1>
-                <div class="mb-4">There was an error. Please try again later.</div>
+                <div class="mb-4">有一个错误，请稍后再试。</div>
             </div>
         </div>
     </div>

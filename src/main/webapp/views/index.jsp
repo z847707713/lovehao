@@ -67,7 +67,7 @@
                         <i class="fa fa-wrench"></i> Settings
                     </a>
 
-                    <a href="#" class="dropdown-item">
+                    <a href="/logout" class="dropdown-item">
                         <i class="fa fa-lock"></i> Logout
                     </a>
                 </div>
