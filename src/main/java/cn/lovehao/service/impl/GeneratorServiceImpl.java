@@ -19,7 +19,6 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public boolean generator(GeneratorInfo info) {
-
         info.setTableNames(tablesService.getAllTablesName());
         try {
             GeneratorUtils.createXml(info);

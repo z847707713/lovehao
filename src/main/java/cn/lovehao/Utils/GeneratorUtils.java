@@ -63,9 +63,9 @@ public class GeneratorUtils {
         property1.addAttribute("name","suppressDate");
         property1.addAttribute("value","true");
         //7.2  设置属性2
-//        Element property2 =  commentGenerator.addElement("property");
-//        property2.addAttribute("name","suppressAllComments");
-//        property2.addAttribute("value","true");
+        Element property2 =  commentGenerator.addElement("property");
+        property2.addAttribute("name","suppressAllComments");
+        property2.addAttribute("value","true");
 
 
         //8. context 添加子节点 jdbcConnection
@@ -145,7 +145,7 @@ public class GeneratorUtils {
         writer.setEscapeText(false);
         writer.write(document);
         writer.close();
-        System.out.println("生成rss.xml 成功");
+        System.out.println("生成xml 成功");
 
         //生成代码
         List<String> warnings = new ArrayList<String>();
@@ -160,15 +160,7 @@ public class GeneratorUtils {
             MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
             System.out.println(warnings);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XMLParserException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -5,7 +5,11 @@
 <mapper namespace="cn.lovehao.dao.TablesMapper">
 
     <select id="selectAllTabelsName" resultType="java.lang.String">
-        select table_name from information_schema.tables where table_schema='test'
+
+        select table_name from
+        information_schema.tables
+        where table_schema='test'
+
     </select>
 
 </mapper>
