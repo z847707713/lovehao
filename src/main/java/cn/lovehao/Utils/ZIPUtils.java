@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ *  压缩工具
+ */
 public class ZIPUtils {
 
     /**

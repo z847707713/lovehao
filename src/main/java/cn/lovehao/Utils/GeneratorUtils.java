@@ -21,6 +21,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  mybatis 代码生成工具
+ *
+ */
 public class GeneratorUtils {
 
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
