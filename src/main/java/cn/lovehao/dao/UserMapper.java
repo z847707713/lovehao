@@ -2,7 +2,7 @@ package cn.lovehao.dao;
 
 import cn.lovehao.entity.User;
 
-public interface UserDao {
+public interface UserMapper {
 
     public User selectById(User user);
 

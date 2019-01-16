@@ -59,9 +59,9 @@ public class GeneratorUtils {
         property1.addAttribute("name","suppressDate");
         property1.addAttribute("value","true");
         //7.2  设置属性2
-        Element property2 =  commentGenerator.addElement("property");
-        property2.addAttribute("name","suppressAllComments");
-        property2.addAttribute("value","true");
+//        Element property2 =  commentGenerator.addElement("property");
+//        property2.addAttribute("name","suppressAllComments");
+//        property2.addAttribute("value","true");
 
 
         //8. context 添加子节点 jdbcConnection
