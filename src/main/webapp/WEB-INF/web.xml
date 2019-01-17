@@ -18,9 +18,9 @@
     </listener>
 
     <!-- 配置监控文件变化监听器 -->
-    <listener>
-        <listener-class>com.zealer.ad.listener.ThreadStartUpListenser</listener-class>
-    </listener>
+    <!--<listener>-->
+        <!--<listener-class>com.zealer.ad.listener.ThreadStartUpListenser</listener-class>-->
+    <!--</listener>-->
 
     <!--  配置springmvc -->
     <servlet>

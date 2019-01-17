@@ -38,11 +38,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(User user) {
-        return userMapper.selectById(user);
+        try{
+            return userMapper.selectById(user);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public User getUserByUsername(User user) {
-        return userMapper.selectByName(user);
+        try{
+            return  userMapper.selectByName(user);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
