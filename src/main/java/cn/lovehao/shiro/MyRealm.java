@@ -5,6 +5,7 @@ import cn.lovehao.service.UserService;
 import com.mchange.lang.ByteUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -20,8 +21,12 @@ public class MyRealm extends AuthorizingRealm {
      * 为当前登录的用户授予角色和权限
      */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
+        //1.从PrincipalCollection 获取登录用户的信息
+        Object pricipal = principals.getPrimaryPrincipal();
+        System.out.println(pricipal);
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         return null;
     }
 

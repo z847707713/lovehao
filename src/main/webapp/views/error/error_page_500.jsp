@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1/common0, maximum-scale=1/common0, minimum-scale=1/common0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carbon - Admin Template</title>
-    <link rel="stylesheet" href="/common/vendor/simple-line-icons/css/simple-line-icons/commoncss">
-    <link rel="stylesheet" href="/common/vendor/font-awesome/css/fontawesome-all/commonmin/commoncss">
-    <link rel="stylesheet" href="/common/css/styles/commoncss">
+    <link rel="stylesheet" href="/common/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/common/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/common/css/styles.css">
 </head>
 <body>
 <div class="page-wrapper flex-row align-items-center">

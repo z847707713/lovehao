@@ -22,4 +22,22 @@
     <mvc:resources location="/**/*.ico" mapping="/**/*.ico" />
     <mvc:resources location="/common/" mapping="/common/**" />
 
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- 错误异常转发jsp页面 -->
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/unauthorized</prop>
+                <prop key="org.apache.shiro.authz.UnauthenticatedException">/unauthenticated</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!-- 使用shiro 注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+
 </beans>
