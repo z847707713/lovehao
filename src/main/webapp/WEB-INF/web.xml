@@ -12,8 +12,14 @@
         <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
 
+    <!-- 配置spring 监听器 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- 配置监控文件变化监听器 -->
+    <listener>
+        <listener-class>com.zealer.ad.listener.ThreadStartUpListenser</listener-class>
     </listener>
 
     <!--  配置springmvc -->
