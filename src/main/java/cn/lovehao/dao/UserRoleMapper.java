@@ -3,6 +3,7 @@ package cn.lovehao.dao;
 import cn.lovehao.entity.UserRole;
 
 public interface UserRoleMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(UserRole record);
@@ -14,4 +15,5 @@ public interface UserRoleMapper {
     int updateByPrimaryKeySelective(UserRole record);
 
     int updateByPrimaryKey(UserRole record);
+
 }
