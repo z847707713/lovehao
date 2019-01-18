@@ -67,5 +67,18 @@
       </if>
     </trim>
   </insert>
+    <select id="selectRolesByUserName" resultType="cn.lovehao.entity.Role">
+      select r.* from role r
+         INNER JOIN user_role ur on r.id = ur.role_id
+         INNER JOIN user u on u.id = ur.user_id
+         where u.username = #{username}
+    </select>
+
+  <select id="selectRoleNamesByUsername" resultType="java.lang.String">
+      select r.role_name from role r
+         INNER JOIN user_role ur on r.id = ur.role_id
+         INNER JOIN user u on u.id = ur.user_id
+         where u.username = #{username}
+  </select>
 
 </mapper>

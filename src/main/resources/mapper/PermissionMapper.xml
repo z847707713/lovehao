@@ -27,6 +27,27 @@
      <include refid="Base_Column_List" />
      from permission
   </select>
+
+  <select id="selectPermissionsByUsername" resultType="cn.lovehao.entity.Permission">
+      select  <include refid="Base_Column_List" />
+     from permission p
+     INNER JOIN role_permission rp ON rp.permission_id = p.id
+     INNER JOIN role r ON rp.role_id = r.id
+     INNER JOIN user_role ur ON ur.role_id = r.id
+     INNER JOIN user u ON ur.user_id = u.id
+     where u.username = #{username}
+  </select>
+
+  <select id="selectPermissionsStrByUsername" resultType="java.lang.String">
+    select p.permission
+    from permission p
+    INNER JOIN role_permission rp ON rp.permission_id = p.id
+    INNER JOIN role r ON rp.role_id = r.id
+    INNER JOIN user_role ur ON ur.role_id = r.id
+    INNER JOIN user u ON ur.user_id = u.id
+    where u.username = #{username}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from permission
     where id = #{id,jdbcType=INTEGER}

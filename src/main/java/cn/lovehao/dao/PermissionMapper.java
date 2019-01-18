@@ -3,6 +3,7 @@ package cn.lovehao.dao;
 import cn.lovehao.entity.Permission;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PermissionMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,5 +19,9 @@ public interface PermissionMapper {
     int updateByPrimaryKey(Permission record);
 
     List<Permission> selectAll(Permission record);
+
+    Set<Permission> selectPermissionsByUsername(String username);
+
+    Set<String> selectPermissionsStrByUsername(String username);
 
 }

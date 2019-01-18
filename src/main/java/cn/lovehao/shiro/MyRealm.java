@@ -1,6 +1,9 @@
 package cn.lovehao.shiro;
 
+import cn.lovehao.entity.Permission;
 import cn.lovehao.entity.User;
+import cn.lovehao.service.PermissionService;
+import cn.lovehao.service.RoleService;
 import cn.lovehao.service.UserService;
 import com.mchange.lang.ByteUtils;
 import org.apache.shiro.authc.*;
@@ -12,11 +15,18 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Set;
+
 public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    PermissionService permissionService;
     /**
      * 为当前登录的用户授予角色和权限
      */
@@ -24,10 +34,13 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
         //1.从PrincipalCollection 获取登录用户的信息
-        Object pricipal = principals.getPrimaryPrincipal();
-        System.out.println(pricipal);
+        String pricipal = (String) principals.getPrimaryPrincipal();
+        Set<String> roles = roleService.getRoleNamesByUserName(pricipal);
+        Set<String> permissions = permissionService.getPermissionsStrByUsername(pricipal);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        return null;
+        info.setRoles(roles);
+        info.setStringPermissions(permissions);
+        return info;
     }
 
     /**
