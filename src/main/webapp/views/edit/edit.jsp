@@ -1,28 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="utf-8" />
-    <title>Full example - Editor.md examples</title>
-    <link rel="stylesheet" href="/common/web/edit/style.css" />
-    <link rel="stylesheet" href="/common/plugin/edit.md/css/editormd.css" />
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    <style>
+<jsp:include page="../common/edit-md-header.jsp" />
 
-    </style>
-</head>
-<body>
-<div id="layout">
-    <header>
-        <h1>完整示例</h1>
-        <p>Full example</p>
-        <ul style="margin: 10px 0 0 18px;">
-            <li>Enable HTML tags decode</li>
-            <li>Enable TeX, Flowchart, Sequence Diagram, Emoji, FontAwesome, Task lists</li>
-            <li>Enable Image upload</li>
-            <li>Enable [TOCM], Search Replace, Code fold</li>
-        </ul>
-    </header>
+<body class="sidebar-fixed header-fixed sidebar-hidden">
+    <div id="header">
+
+        <div class="card-body">
+
+
+        <div class="col-md-12">
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input id="placeholder-input" class="form-control" placeholder="请输入标题">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary" >发布文章</button>
+            </div>
+        </div>
+        </div>
+        </div>
+
+    </div>
+
+
+    <!--
     <div class="btns">
         <button id="goto-line-btn">Goto line 90</button>
         <button id="show-btn">Show editor</button>
@@ -38,23 +41,39 @@
         <button id="toc-menu-btn">ToC Dropdown menu</button>
         <button id="toc-default-btn">ToC default</button>
     </div>
+    -->
     <div id="test-editormd"></div>
-</div>
 
-<script src="/common/js/jquery.js"></script>
-<script src="/common/plugin/edit.md/editormd.js"></script>
+
+</body>
 <script type="text/javascript">
-    var testEditor;
 
+
+    function onbeforeunload_handler(){
+        var warning="确认退出?";
+        return warning;
+    }
+
+    function onunload_handler(){
+        var warning="谢谢光临";
+        alert(warning);
+    }
+
+    var testEditor;
     $(function() {
 
+        window.onbeforeunload = onbeforeunload_handler;
+        window.onunload = onunload_handler;
+        var heidht = $(document).height() - 20;
+        var card_body_heidht = $(".card-body").outerHeight();
+        heidht -= card_body_heidht;
         $.ajax({
             url:"/test",
             type:"get",
             success:function(md){
                 testEditor = editormd("test-editormd", {
-                    width: "90%",
-                    height: 740,
+                    width: "98%",
+                    height: heidht,
                     path : '/common/plugin/edit.md/lib/',
                     theme : "dark",
                     previewTheme : "dark",
@@ -154,5 +173,4 @@
         });
     });
 </script>
-</body>
-</html>
+<jsp:include page="../common/footer.jsp" />
