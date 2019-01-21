@@ -48,7 +48,37 @@
     where u.username = #{username}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    <select id="selectAllPermission" resultType="cn.lovehao.entity.Permission">
+        select
+      <include refid="Base_Column_List" />
+      from permission
+      <where>
+          <if test="id != null">
+             id = #{id}
+          </if>
+          <if test="permission != null and permission!= ''">
+             and permission like concat('%',#{permission},'%')
+          </if>
+          <if test="permissionName != null and permissionName != ''">
+            and permissionName like concat('%',#{permissionName},'%')
+          </if>
+          <if test="createTime != null">
+            and createTime like  concat('%',#{createTime},'%')
+          </if>
+          <if test="createUser != null and createUser != ''">
+            and createUser like concat('%',#{creatUser},'%')
+          </if>
+          <if test="updateTime != null ">
+            and updateTime like concat('%',#{updateTime},'%')
+          </if>
+          <if test="updateUser != null and updateUser != ''">
+            and updateUser like concat('%',#{updateUser},'%')
+          </if>
+      </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>

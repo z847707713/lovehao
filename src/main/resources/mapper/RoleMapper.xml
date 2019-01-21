@@ -67,7 +67,39 @@
       </if>
     </trim>
   </insert>
-    <select id="selectRolesByUserName" resultType="cn.lovehao.entity.Role">
+
+
+    <update id="updateByPrimaryKeySelective">
+      UPDATE role
+      <set>
+         <if test="roleName != null and roleName != ''">
+              role_name = #{roleName},
+         </if>
+        <if test="roleDesc != null and roleDesc != ''">
+              role_desc = #{roleDesc},
+        </if>
+        <if test="createUser != null and createUser != ''">
+             create_user = #{createUser},
+        </if>
+        <if test="createTime != null and createTime != ''">
+             create_time = #{createTime},
+        </if>
+        <if test="updateUser != null and updateUser != ''">
+          update_user = #{updateUser},
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+          update_time = #{createTime},
+        </if>
+      </set>
+      where id = #{id}
+    </update>
+
+  <delete id="deleteByPrimaryKey">
+    delete from role where id = #{id}
+  </delete>
+
+
+  <select id="selectRolesByUserName" resultType="cn.lovehao.entity.Role">
       select r.* from role r
          INNER JOIN user_role ur on r.id = ur.role_id
          INNER JOIN user u on u.id = ur.user_id
@@ -79,6 +111,11 @@
          INNER JOIN user_role ur on r.id = ur.role_id
          INNER JOIN user u on u.id = ur.user_id
          where u.username = #{username}
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultType="cn.lovehao.entity.Role">
+    select * from role where id =  #{id}
   </select>
 
 </mapper>
