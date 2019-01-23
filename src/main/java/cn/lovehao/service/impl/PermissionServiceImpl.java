@@ -1,6 +1,8 @@
 package cn.lovehao.service.impl;
 
 import cn.lovehao.dao.PermissionMapper;
+import cn.lovehao.dto.Page;
+import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
 import cn.lovehao.service.PermissionService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -36,6 +38,21 @@ public class PermissionServiceImpl implements PermissionService {
         try{
            return permissionMapper.selectPermissionsStrByUsername(username);
         } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Page<Permission> getPermissionPages(PermissionDto permissionDto) {
+        try{
+            Page<Permission> result = permissionMapper.selectAllPermission(permissionDto);
+            if(result == null){
+                result = new Page<>();
+            }
+            result.setTotalPage(permissionMapper.selectCount(permissionDto));
+            return result;
+        }catch (Exception e){
             e.printStackTrace();
         }
         return null;

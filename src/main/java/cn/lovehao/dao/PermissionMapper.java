@@ -1,5 +1,6 @@
 package cn.lovehao.dao;
 
+import cn.lovehao.dto.Page;
 import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
 
@@ -26,6 +27,8 @@ public interface PermissionMapper {
 
     Set<String> selectPermissionsStrByUsername(String username);
 
-    List<Permission> selectAllPermission(PermissionDto permissionDto);
+    Page<Permission> selectAllPermission(PermissionDto permissionDto);
+
+    Integer selectCount(PermissionDto permissionDto);
 
 }

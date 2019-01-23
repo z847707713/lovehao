@@ -1,5 +1,6 @@
 package cn.lovehao.dao;
 
+import cn.lovehao.dto.Page;
 import cn.lovehao.dto.RoleDto;
 import cn.lovehao.entity.Permission;
 import cn.lovehao.entity.Role;
@@ -22,5 +23,9 @@ public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 
     Role selectByPrimaryKey(Integer id);
+
+    Page<Role> selectAllRoles(RoleDto roleDto);
+
+    Integer selectCount(RoleDto roleDto);
 
 }

@@ -119,23 +119,23 @@
                     </a>
                 </li>
 
-                <li class="nav-title">More</li>
+
 
                 <li class="nav-item nav-dropdown">
                     <a href="#" class="nav-link nav-dropdown-toggle">
-                        <i class="icon icon-umbrella"></i> Pages <i class="fa fa-caret-left"></i>
+                        <i class="icon icon-umbrella"></i> 系统管理 <i class="fa fa-caret-left"></i>
                     </a>
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a href="blank.html" class="nav-link">
-                                <i class="icon icon-umbrella"></i> Blank Page
+                            <a href="/roles" class="nav-link">
+                                <i class="icon icon-umbrella"></i> 角色管理
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="login.html" class="nav-link">
-                                <i class="icon icon-umbrella"></i> Login
+                            <a href="/permissions" class="nav-link">
+                                <i class="icon icon-umbrella"></i> 权限管理
                             </a>
                         </li>
 

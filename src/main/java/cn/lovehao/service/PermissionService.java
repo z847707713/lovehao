@@ -1,5 +1,7 @@
 package cn.lovehao.service;
 
+import cn.lovehao.dto.Page;
+import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
 
 import java.util.List;
@@ -12,6 +14,8 @@ public interface PermissionService {
    Set<Permission> getPermissionsByUsername(String username);
 
    Set<String> getPermissionsStrByUsername(String username);
+
+   Page<Permission> getPermissionPages(PermissionDto permissionDto);
 
 
 }

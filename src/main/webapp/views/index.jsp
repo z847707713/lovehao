@@ -20,7 +20,7 @@
                                 <div class="h2 text-muted">
                                     <i class="icon icon-people"></i>
                                 </div>
-                            </div>
+                             </div>
                         </div>
                     </div>
 

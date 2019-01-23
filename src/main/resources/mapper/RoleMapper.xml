@@ -118,4 +118,64 @@
     select * from role where id =  #{id}
   </select>
 
+  <resultMap id="page" type="cn.lovehao.dto.Page" >
+     <collection property="data" ofType="cn.lovehao.entity.Role" resultMap="BaseResultMap">
+      </collection>
+  </resultMap>
+
+  <select id="selectAllRoles" resultMap="page">
+     select * from role
+     <where>
+        <if test="id != null">
+            id like concat('%',#{id},'%')
+        </if>
+       <if test="roleName != null and roleName != ''">
+           and role_name like concat('%',#{roleName},'%')
+       </if>
+       <if test="roleDesc != null and roleDesc != ''">
+           and role_desc like concat('%',#{roleDesc},'%')
+       </if>
+       <if test="createUser">
+           and create_user like concat('%',#{createUser},'%')
+       </if>
+       <if test="createTime">
+           and create_time like concat('%',#{createTime},'%')
+       </if>
+       <if test="updateUser">
+           and update_user like concat('%',#{updateUser},'%')
+       </if>
+       <if test="updateTime">
+           and update_time like concat('%',#{updateTime},'%')
+       </if>
+     </where>
+     LIMIT ${(currentPage - 1) * pageShowCount },${pageShowCount}
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select (CEILING(count(*) / ${pageShowCount})) totalPage from role
+    <where>
+      <if test="id != null">
+        id like concat('%',#{id},'%')
+      </if>
+      <if test="roleName != null and roleName != ''">
+        and role_name like concat('%',#{roleName},'%')
+      </if>
+      <if test="roleDesc != null and roleDesc != ''">
+        and role_desc like concat('%',#{roleDesc},'%')
+      </if>
+      <if test="createUser">
+        and create_user like concat('%',#{createUser},'%')
+      </if>
+      <if test="createTime">
+        and create_time like concat('%',#{createTime},'%')
+      </if>
+      <if test="updateUser">
+        and update_user like concat('%',#{updateUser},'%')
+      </if>
+      <if test="updateTime">
+        and update_time like concat('%',#{updateTime},'%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

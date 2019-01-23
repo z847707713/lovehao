@@ -2,7 +2,7 @@ package cn.lovehao.dto;
 
 import java.util.Date;
 
-public class RoleDto {
+public class RoleDto extends PageBase{
 
     private Integer id;
 

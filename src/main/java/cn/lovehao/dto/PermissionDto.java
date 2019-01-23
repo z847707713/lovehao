@@ -2,7 +2,7 @@ package cn.lovehao.dto;
 
 import java.util.Date;
 
-public class PermissionDto {
+public class PermissionDto extends PageBase{
     private Integer id;
 
     private String permission;

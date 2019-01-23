@@ -49,7 +49,13 @@
   </select>
 
 
-    <select id="selectAllPermission" resultType="cn.lovehao.entity.Permission">
+    <resultMap id="page" type="cn.lovehao.dto.Page">
+      <result column="totalPage" jdbcType="INTEGER" property="totalPage" />
+      <collection property="data" ofType="cn.lovehao.entity.Permission"
+                  resultMap="cn.lovehao.dao.PermissionMapper.BaseResultMap"/>
+    </resultMap>
+
+    <select id="selectAllPermission" resultMap="page">
         select
       <include refid="Base_Column_List" />
       from permission
@@ -61,24 +67,54 @@
              and permission like concat('%',#{permission},'%')
           </if>
           <if test="permissionName != null and permissionName != ''">
-            and permissionName like concat('%',#{permissionName},'%')
+            and permission_name like concat('%',#{permissionName},'%')
           </if>
           <if test="createTime != null">
-            and createTime like  concat('%',#{createTime},'%')
+            and create_time like  concat('%',#{createTime},'%')
           </if>
           <if test="createUser != null and createUser != ''">
-            and createUser like concat('%',#{creatUser},'%')
+            and create_user like concat('%',#{creatUser},'%')
           </if>
           <if test="updateTime != null ">
-            and updateTime like concat('%',#{updateTime},'%')
+            and update_time like concat('%',#{updateTime},'%')
           </if>
           <if test="updateUser != null and updateUser != ''">
-            and updateUser like concat('%',#{updateUser},'%')
+            and update_user like concat('%',#{updateUser},'%')
           </if>
       </where>
+      LIMIT ${(currentPage - 1) * pageShowCount },${pageShowCount}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectCount" resultType="java.lang.Integer">
+    select
+    (CEILING(count(*) / ${pageShowCount})) totalPage
+    from permission
+    <where>
+      <if test="id != null">
+        id = #{id}
+      </if>
+      <if test="permission != null and permission!= ''">
+        and permission like concat('%',#{permission},'%')
+      </if>
+      <if test="permissionName != null and permissionName != ''">
+        and permission_name like concat('%',#{permissionName},'%')
+      </if>
+      <if test="createTime != null">
+        and create_time like  concat('%',#{createTime},'%')
+      </if>
+      <if test="createUser != null and createUser != ''">
+        and create_user like concat('%',#{creatUser},'%')
+      </if>
+      <if test="updateTime != null ">
+        and update_time like concat('%',#{updateTime},'%')
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+        and update_user like concat('%',#{updateUser},'%')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
