@@ -58,4 +58,16 @@ public class PermissionServiceImpl implements PermissionService {
         return null;
     }
 
+    @Override
+    public boolean deleteById(Permission permission) {
+        try{
+            if(permissionMapper.deleteByPrimaryKey(permission.getId()) > 0){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

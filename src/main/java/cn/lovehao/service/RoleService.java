@@ -12,7 +12,8 @@ public interface RoleService {
 
     public Set<String> getRoleNamesByUserName(String username);
 
+    public Page<Role> getRolePages(RoleDto roleDto);
 
-     public Page<Role> getRolePages(RoleDto roleDto);
+    public boolean deleteById(Integer id);
 
 }

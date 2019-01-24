@@ -83,6 +83,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--  配置spring mvc 支持 restful 风格  -->
+    <filter>
+      <filter-name>hiddenHttpMethodFilter</filter-name>
+      <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <error-page>
         <error-code>404</error-code>
         <location>/views/error/error_page_404.jsp</location>

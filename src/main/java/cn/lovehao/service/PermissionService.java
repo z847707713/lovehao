@@ -17,5 +17,6 @@ public interface PermissionService {
 
    Page<Permission> getPermissionPages(PermissionDto permissionDto);
 
+   boolean deleteById(Permission permission);
 
 }

@@ -146,6 +146,30 @@
         })
     }
 
+
+    //绑定点击事件
+    function bindEvent(){
+        $('.deleteBtn').click(function(){
+            var id = $(this).parent().parent().children(":first").html();
+            var $this = $(this).parent().parent();
+            console.log($this);
+            $.ajax({
+                url:"/role/" + id,
+                type:"POST",
+                data:{
+                    _method:'DELETE'
+                },success:function(data){
+                    if(data.code == 1){
+                        console.log(data);
+                        var currentPage = $('#pageLimit').bootstrapPaginator("getPages").current;
+                        loadPage(currentPage);
+                    }
+                }
+            })
+            return false;
+        });
+    }
+
     //数据渲染
     function loadData(data){
         $("#tbody").html('');
@@ -171,9 +195,10 @@
                 '                        <td>' + data[i].createTime+ '</td>' +
                 '                        <td>' +data[i].updateUser + '</td>' +
                 '                        <td>' +data[i].updateTime + '</td>' +
-                '                        <td>' + '删除' + '</td>' +
+                '                        <td>' + '<a class="deleteBtn" href="#">删除</a>' + '</td>' +
                 '                    </tr>');
         }
+        bindEvent();
     }
 
 </script>

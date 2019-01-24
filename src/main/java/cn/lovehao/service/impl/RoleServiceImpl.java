@@ -51,4 +51,16 @@ public class RoleServiceImpl implements RoleService {
         return null;
     }
 
+    @Override
+    public boolean deleteById(Integer id) {
+        try{
+           if(roleMapper.deleteByPrimaryKey(id) > 0){
+              return true;
+           }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
