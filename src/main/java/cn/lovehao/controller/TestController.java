@@ -5,6 +5,7 @@ import cn.lovehao.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
@@ -33,7 +34,15 @@ public class TestController {
 
     @RequestMapping("/test")
     public String test(HttpServletRequest req, HttpServletResponse resp){
-       return "forward:/views/edit/test.jsp";
+       return "test";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public String headerTest(HttpServletRequest request){
+        System.out.println(request.getHeader("token"));
+        return "true";
+    }
+
 
 }
