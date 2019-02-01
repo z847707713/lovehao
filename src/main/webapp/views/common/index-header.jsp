@@ -22,8 +22,8 @@
     <script src="/common/plugin/bootstrap-paginator/bootstrap-paginator.min.js" ></script>
     <!--  序列化表单 -->
     <script src="/common/js/serialize.js" ></script>
-
-
+    <!-- 弹出层layer -->
+    <script src="/common/plugin/layer/layer.js" ></script>
     <style>
         /* Chart.js */
         @-webkit-keyframes chartjs-render-animation

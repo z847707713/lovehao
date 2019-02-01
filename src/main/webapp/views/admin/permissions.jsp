@@ -174,7 +174,7 @@
                   '                        <td>' +data[i].updateUser + '</td>' +
                   '                        <td>' +data[i].updateTime + '</td>' +
                   '                        <td>' + '删除' + '</td>' +
-                  '                    </tr>');
+                  '                </tr>');
           }
       }
 

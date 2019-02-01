@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class BaseEntity {
 
-    private Integer createby;
-    private Date createTime;
-    private Integer updateby;
-    private Date updateTime;
+    protected String createUser;
+    protected Date createTime;
+    protected String updateUser;
+    protected Date updateTime;
 
-    public Integer getCreateby() {
-        return createby;
+    public String getCreateUser() {
+        return createUser;
     }
 
-    public void setCreateby(Integer createby) {
-        this.createby = createby;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
 
     public Date getCreateTime() {
@@ -25,12 +25,12 @@ public class BaseEntity {
         this.createTime = createTime;
     }
 
-    public Integer getUpdateby() {
-        return updateby;
+    public String getUpdateUser() {
+        return updateUser;
     }
 
-    public void setUpdateby(Integer updateby) {
-        this.updateby = updateby;
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     public Date getUpdateTime() {

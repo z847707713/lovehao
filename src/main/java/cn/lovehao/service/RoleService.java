@@ -16,4 +16,10 @@ public interface RoleService {
 
     public boolean deleteById(Integer id);
 
+    public Role getRoleById(Integer id);
+
+    public boolean updateById(Role role);
+
+    public boolean addRole(Role role);
+
 }

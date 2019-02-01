@@ -5,9 +5,9 @@
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
-    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <insert id="insert" parameterType="cn.lovehao.entity.Role">
@@ -15,8 +15,8 @@
       create_user, create_time, update_user, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
-      #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lovehao.entity.Role">
     insert into role
@@ -54,13 +54,13 @@
         #{roleDesc,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null">
-        #{createUser,jdbcType=INTEGER},
+        #{createUser,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
-        #{updateUser,jdbcType=INTEGER},
+        #{updateUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
@@ -81,14 +81,14 @@
         <if test="createUser != null and createUser != ''">
              create_user = #{createUser},
         </if>
-        <if test="createTime != null and createTime != ''">
+        <if test="createTime != null ">
              create_time = #{createTime},
         </if>
         <if test="updateUser != null and updateUser != ''">
           update_user = #{updateUser},
         </if>
-        <if test="updateTime != null and updateTime != ''">
-          update_time = #{createTime},
+        <if test="updateTime != null ">
+          update_time = #{updateTime},
         </if>
       </set>
       where id = #{id}

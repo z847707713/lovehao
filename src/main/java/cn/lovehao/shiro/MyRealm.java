@@ -61,7 +61,7 @@ public class MyRealm extends AuthorizingRealm {
 
         //(带盐值加密)
         ByteSource credentialsSalt = ByteSource.Util.bytes(usernamePasswordToken.getUsername());   //把用户名作为盐值
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),credentialsSalt,getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,user.getPassword(),credentialsSalt,getName());
         return info;
     }
 }

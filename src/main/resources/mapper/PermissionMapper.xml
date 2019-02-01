@@ -7,9 +7,9 @@
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="permission_desc" jdbcType="VARCHAR" property="permissionDesc" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
     id, permission, permission_name, permission_desc, create_time, create_user, update_time, 
@@ -123,8 +123,8 @@
       permission_desc, create_time, create_user, 
       update_time, update_user)
     values (#{id,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
-      #{permissionDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER})
+      #{permissionDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lovehao.entity.Permission">
     insert into permission
@@ -171,13 +171,13 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUser != null">
-        #{createUser,jdbcType=INTEGER},
+        #{createUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
-        #{updateUser,jdbcType=INTEGER},
+        #{updateUser,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -197,13 +197,13 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUser != null">
-        create_user = #{createUser,jdbcType=INTEGER},
+        create_user = #{createUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=INTEGER},
+        update_user = #{updateUser,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -214,9 +214,9 @@
       permission_name = #{permissionName,jdbcType=VARCHAR},
       permission_desc = #{permissionDesc,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_user = #{createUser,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_user = #{updateUser,jdbcType=INTEGER}
+      update_user = #{updateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

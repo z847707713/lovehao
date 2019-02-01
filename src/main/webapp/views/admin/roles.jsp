@@ -41,6 +41,7 @@
         <div class="card">
             <div class="card-header bg-light">
                 角色列表
+                <button id="addBtn" class="btn btn-primary" style="float: right;">新增</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -80,6 +81,38 @@
                 loadPage(1);
             }
         });
+
+        $("#addBtn").click(function(){
+            layer.open({
+                type: 2,
+                title: '角色新增',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['60%', '65%'],
+                content: '/role' //iframe的url
+                ,btn: ['确定', '取消']
+                ,yes: function(index, layero){
+                    var formdata = layer.getChildFrame('#formData',index);
+                    var data = formdata.serializeObject();
+                    $.ajax({
+                        url:"/role",
+                        type:"POST",
+                        data:data,
+                        success:function(result){
+                            console.log(result);
+                            if(result.code == 1){
+                                loadPage(getCurrentPage());
+                                layer.close(index);
+                            }
+                        }
+                    })
+                }
+                ,btn2: function(index, layero){
+                    layer.close(index)
+                }
+            });
+        });
+
 
     })
 
@@ -146,6 +179,10 @@
         })
     }
 
+    //获取当前是第几页
+    function getCurrentPage(){
+       return  $('#pageLimit').bootstrapPaginator("getPages").current;
+    }
 
     //绑定点击事件
     function bindEvent(){
@@ -168,7 +205,44 @@
             })
             return false;
         });
+
+        $(".editBtn").click(function(){
+            var id = $(this).parent().parent().children(":first").html();
+            $(function(){
+                layer.open({
+                    type: 2,
+                    title: '角色编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['60%', '65%'],
+                    content: '/role/' + id //iframe的url
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero){
+                         var formdata = layer.getChildFrame('#formData',index);
+                         var data = formdata.serializeObject();
+                         data._method = 'PUT';
+                         $.ajax({
+                             url:"/role",
+                             type:"POST",
+                             data:data,
+                             success:function(result){
+                                 console.log(result);
+                                 if(result.code == 1){
+                                     loadPage(getCurrentPage());
+                                     layer.close(index);
+                                 }
+                             }
+                         })
+                    }
+                    ,btn2: function(index, layero){
+                        layer.close(index)
+                    }
+                });
+            })
+        });
+
     }
+
 
     //数据渲染
     function loadData(data){
@@ -195,7 +269,8 @@
                 '                        <td>' + data[i].createTime+ '</td>' +
                 '                        <td>' +data[i].updateUser + '</td>' +
                 '                        <td>' +data[i].updateTime + '</td>' +
-                '                        <td>' + '<a class="deleteBtn" href="#">删除</a>' + '</td>' +
+                '                        <td>' + '<a class="editBtn" href="#">修改</a>' +
+                '                                <a class="deleteBtn" href="#">删除</a>' + '</td>' +
                 '                    </tr>');
         }
         bindEvent();
