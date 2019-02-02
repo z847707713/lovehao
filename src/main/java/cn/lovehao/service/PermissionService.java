@@ -19,4 +19,10 @@ public interface PermissionService {
 
    boolean deleteById(Permission permission);
 
+   Permission getPermissionById(Integer id);
+
+   boolean updateById(Permission permission);
+
+   boolean addPermission(Permission permission);
+
 }

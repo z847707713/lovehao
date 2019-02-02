@@ -17,15 +17,20 @@ import java.util.Map;
 @Controller
 public class RoleController {
 
+    //添加与编辑页面
+    private static final String ADD_EDIT_VIEW = "admin/permission";
+    //列表页面
+    private static final String LIST_VIEW = "admin/permissions";
+
     @Autowired
     RoleService roleService;
 
     @RequestMapping(value = "/roles",method = RequestMethod.GET)
     public String init(){
-        return "admin/roles";
+        return LIST_VIEW;
     }
 
-
+   
     @ResponseBody
     @RequestMapping(value = "/role/list",method = RequestMethod.POST)
     public Page<Role> list(RoleDto roleDto){
@@ -34,14 +39,14 @@ public class RoleController {
 
 
     @RequestMapping(value = "/role/{id}",method = RequestMethod.GET)
-    public String get(@PathVariable("id")Integer id, Map<String,Object> map){
+    public String editView(@PathVariable("id")Integer id, Map<String,Object> map){
         map.put("role",roleService.getRoleById(id));
-        return "admin/role";
+        return ADD_EDIT_VIEW;
     }
 
     @RequestMapping(value = "/role",method = RequestMethod.GET)
     public String addView(){
-        return "admin/role";
+        return ADD_EDIT_VIEW;
     }
 
     /**

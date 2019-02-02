@@ -1,5 +1,6 @@
 package cn.lovehao.service.impl;
 
+import cn.lovehao.Utils.SetUserAndDateUtils;
 import cn.lovehao.dao.PermissionMapper;
 import cn.lovehao.dto.Page;
 import cn.lovehao.dto.PermissionDto;
@@ -65,6 +66,38 @@ public class PermissionServiceImpl implements PermissionService {
                 return true;
             }
         } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Permission getPermissionById(Integer id) {
+        try{
+            return permissionMapper.selectByPrimaryKey(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateById(Permission permission) {
+        SetUserAndDateUtils.setUpdateUserAndDate(permission);
+        try{
+            return permissionMapper.updateByPrimaryKeySelective(permission) > 0 ? true : false;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addPermission(Permission permission) {
+        SetUserAndDateUtils.setUserAndDate(permission);
+        try{
+            return permissionMapper.insertSelective(permission) > 0 ? true :false;
+        }catch (Exception e){
             e.printStackTrace();
         }
         return false;
