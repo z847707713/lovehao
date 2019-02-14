@@ -18,9 +18,9 @@ import java.util.Map;
 public class RoleController {
 
     //添加与编辑页面
-    private static final String ADD_EDIT_VIEW = "admin/permission";
+    private static final String ADD_EDIT_VIEW = "admin/role";
     //列表页面
-    private static final String LIST_VIEW = "admin/permissions";
+    private static final String LIST_VIEW = "admin/roles";
 
     @Autowired
     RoleService roleService;

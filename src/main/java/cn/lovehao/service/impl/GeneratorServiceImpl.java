@@ -25,7 +25,7 @@ public class GeneratorServiceImpl implements GeneratorService {
             String path = info.getGenerateJavaFilePath();
             ZIPUtils.compress(path,path+".zip");
             //TODO:删除生成的文件
-            //如果多次生成，mapper.xml 文件中会有重复
+            //如果多次生成，mapper.xml 文件中会有重复代码
             //这里把文件删除，每次重新生成
             File file = new File(path);
             deleteDir(file);
