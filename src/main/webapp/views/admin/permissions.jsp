@@ -40,6 +40,7 @@
         <div class="card">
                 <div class="card-header bg-light">
                     权限列表
+                    <button id="addBtn" class="btn btn-primary" style="float: right;">新增</button>
                 </div>
            <div class="card-body">
             <div class="table-responsive">
@@ -78,6 +79,38 @@
               if(event.keyCode ==13){
                   loadPage(1);
               }
+          });
+
+          //新增按钮点击事件
+          $("#addBtn").click(function(){
+              layer.open({
+                  type: 2,
+                  title: '权限新增',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['60%', '65%'],
+                  content: '/permission' //iframe的url
+                  ,btn: ['确定', '取消']
+                  ,yes: function(index, layero){
+                      var formdata = layer.getChildFrame('#formData',index);
+                      var data = formdata.serializeObject();
+                      $.ajax({
+                          url:"/permission",
+                          type:"POST",
+                          data:data,
+                          success:function(result){
+                              console.log(result);
+                              if(result.code == 1){
+                                  loadPage(getCurrentPage());
+                                  layer.close(index);
+                              }
+                          }
+                      })
+                  }
+                  ,btn2: function(index, layero){
+                      layer.close(index)
+                  }
+              });
           });
 
       })
@@ -146,6 +179,66 @@
           })
       }
 
+      //绑定点击事件
+      function bindEvent(){
+          $('.deleteBtn').click(function(){
+              var id = $(this).parent().parent().children(":first").html();
+              var $this = $(this).parent().parent();
+              console.log($this);
+              $.ajax({
+                  url:"/permission",
+                  type:"POST",
+                  data:{
+                      _method:'DELETE',
+                      id:id
+                  },success:function(data){
+                      if(data.code == 1){
+                          console.log(data);
+                          var currentPage = $('#pageLimit').bootstrapPaginator("getPages").current;
+                          loadPage(currentPage);
+                      }
+                  }
+              })
+              return false;
+          });
+
+          $(".editBtn").click(function(){
+              var id = $(this).parent().parent().children(":first").html();
+              $(function(){
+                  layer.open({
+                      type: 2,
+                      title: '权限编辑',
+                      shadeClose: true,
+                      shade: 0.8,
+                      area: ['60%', '65%'],
+                      content: '/permission/' + id //iframe的url
+                      ,btn: ['确定', '取消']
+                      ,yes: function(index, layero){
+                          var formdata = layer.getChildFrame('#formData',index);
+                          var data = formdata.serializeObject();
+                          data._method = 'PUT';
+                          $.ajax({
+                              url:"/permission",
+                              type:"POST",
+                              data:data,
+                              success:function(result){
+                                  console.log(result);
+                                  if(result.code == 1){
+                                      loadPage(getCurrentPage());
+                                      layer.close(index);
+                                  }
+                              }
+                          })
+                      }
+                      ,btn2: function(index, layero){
+                          layer.close(index)
+                      }
+                  });
+              })
+          });
+
+      }
+
       //数据渲染
       function loadData(data){
           $("#tbody").html('');
@@ -173,9 +266,16 @@
                   '                        <td>' + data[i].createTime+ '</td>' +
                   '                        <td>' +data[i].updateUser + '</td>' +
                   '                        <td>' +data[i].updateTime + '</td>' +
-                  '                        <td>' + '删除' + '</td>' +
+                  '                        <td>' + '<a class="editBtn" href="#">修改</a>' +
+                  '                                <a class="deleteBtn" href="#">删除</a>' + '</td>' +
                   '                </tr>');
           }
+          bindEvent();
+      }
+
+      //获取当前是第几页
+      function getCurrentPage(){
+          return  $('#pageLimit').bootstrapPaginator("getPages").current;
       }
 
 </script>

@@ -221,7 +221,7 @@
                          var formdata = layer.getChildFrame('#formData',index);
                          var data = formdata.serializeObject();
                          data._method = 'PUT';
-                         $.ajax({
+                          $.ajax({
                              url:"/role",
                              type:"POST",
                              data:data,
