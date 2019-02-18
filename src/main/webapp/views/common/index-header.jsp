@@ -24,6 +24,11 @@
     <script src="/common/js/serialize.js" ></script>
     <!-- 弹出层layer -->
     <script src="/common/plugin/layer/layer.js" ></script>
+
+    <!-- 菜单选中效果 -->
+    <script src="common/js/menu.js">
+    </script>
+
     <style>
         /* Chart.js */
         @-webkit-keyframes chartjs-render-animation

@@ -40,15 +40,15 @@ public class PermissionController {
 
     /**
      * 新增
-     * @param permission
-     * @return
+                * @param permission
+                * @return
      */
-    @ResponseBody
-    @RequestMapping(value = "/permission",method = RequestMethod.POST)
-    public ResponseMsg<Permission> add(Permission permission){
-        if(permissionService.addPermission(permission)){
-            return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
-        }
+        @ResponseBody
+        @RequestMapping(value = "/permission",method = RequestMethod.POST)
+        public ResponseMsg<Permission> add(Permission permission){
+            if(permissionService.addPermission(permission)){
+                return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
+            }
         return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);
     }
 

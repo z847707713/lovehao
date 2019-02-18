@@ -6,7 +6,7 @@
                 <li class="nav-title">Navigation</li>
 
                 <li class="nav-item">
-                    <a href="/" class="nav-link active">
+                    <a href="/" class="nav-link">
                         <i class="icon icon-speedometer"></i> Dashboard
                     </a>
                 </li>
