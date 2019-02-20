@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="/common/vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="/common/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/common/css/styles.css">
-    <script src="/common/vendor/jquery/jquery.min.js"></script>
+
+
+    <!-- jquery -->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
     <script src="/common/vendor/popper.js/popper.min.js"></script>
     <script src="/common/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="/common/vendor/chart.js/chart.min.js"></script>
@@ -26,8 +30,22 @@
     <script src="/common/plugin/layer/layer.js" ></script>
 
     <!-- 菜单选中效果 -->
-    <script src="common/js/menu.js">
-    </script>
+    <script src="/common/js/menu.js"> </script>
+
+    <!-- 文本长度限制插件 -->
+    <script src="/common/plugin/wordlimit/wordlimit.js"> </script>
+
+    <!--  jquery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- SweetAlert 对话框 -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!--  z-tree插件 -->
+    <link rel="stylesheet" href="/common/plugin/zTree_v3/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+    <script src="/common/plugin/zTree_v3/js/jquery.ztree.core.js"></script>
+    <script src="/common/plugin/zTree_v3/js/jquery.ztree.excheck.js"></script>
 
     <style>
         /* Chart.js */

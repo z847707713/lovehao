@@ -113,6 +113,7 @@
               });
           });
 
+          $(document).tooltip();
       })
 
 
@@ -183,22 +184,26 @@
       function bindEvent(){
           $('.deleteBtn').click(function(){
               var id = $(this).parent().parent().children(":first").html();
-              var $this = $(this).parent().parent();
-              console.log($this);
-              $.ajax({
-                  url:"/permission",
-                  type:"POST",
-                  data:{
-                      _method:'DELETE',
-                      id:id
-                  },success:function(data){
-                      if(data.code == 1){
-                          console.log(data);
-                          var currentPage = $('#pageLimit').bootstrapPaginator("getPages").current;
-                          loadPage(currentPage);
+              swal({
+                  title:"提示",
+                  text:"删除之后不可恢复，是否确认删除",
+                  icon:'warning',
+                  buttons:{
+                      cancel:{
+                          text:'取消',
+                          visible: true,
+                          value:false
+                      },
+                      confirm: {
+                          text:"确定",
+                          value:true
                       }
                   }
-              })
+              }).then(function(value){
+                  if(value){
+                      deleteData(id);
+                  }
+              });
               return false;
           });
 
@@ -239,6 +244,8 @@
 
       }
 
+
+
       //数据渲染
       function loadData(data){
           $("#tbody").html('');
@@ -260,8 +267,8 @@
               $("#tbody").append('<tr>' +
                   '                        <td>'+ data[i].id +'</td>' +
                   '                        <td class="text-nowrap">' + data[i].permission + '</td>' +
-                  '                        <td>'+ data[i].permissionName +'</td>' +
-                  '                        <td>' + data[i].permissionDesc + '</td>' +
+                  '                        <td ><a class="wordlimit">'+ data[i].permissionName +'</a></td>' +
+                  '                        <td><a class="wordlimit">'+ data[i].permissionDesc +'</a></td>' +
                   '                        <td>' +data[i].createUser + '</td>' +
                   '                        <td>' + data[i].createTime+ '</td>' +
                   '                        <td>' +data[i].updateUser + '</td>' +
@@ -271,11 +278,37 @@
                   '                </tr>');
           }
           bindEvent();
+          limitWord();
       }
 
       //获取当前是第几页
       function getCurrentPage(){
           return  $('#pageLimit').bootstrapPaginator("getPages").current;
+      }
+
+      /**
+       *  限制文本显示数量
+       */
+      function limitWord () {
+          $('.wordlimit').wordLimit(6);
+      }
+
+
+      function deleteData(id){
+          $.ajax({
+              url:"/permission",
+              type:"POST",
+              data:{
+                  _method:'DELETE',
+                  id:id
+              },success:function(data){
+                  if(data.code == 1){
+                      console.log(data);
+                      var currentPage = $('#pageLimit').bootstrapPaginator("getPages").current;
+                      loadPage(currentPage);
+                  }
+              }
+          })
       }
 
 </script>
