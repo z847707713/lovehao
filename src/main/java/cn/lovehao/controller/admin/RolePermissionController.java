@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/userRole")
-public class UserRoleController {
+@RequestMapping("/rolePermission")
+public class RolePermissionController {
 
     @Autowired
     PermissionService permissionService;
@@ -25,7 +25,7 @@ public class UserRoleController {
     @RequestMapping("/view/{id}")
     public String view(@PathVariable Integer id, Map<String,Object> map){
         map.put("id",id);
-        return "/admin/userRole";
+        return "/admin/rolePermission";
     }
 
     @ResponseBody
@@ -44,5 +44,3 @@ public class UserRoleController {
     }
 
 }
-
-

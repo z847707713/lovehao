@@ -54,11 +54,14 @@
     // ];
 
     $(document).ready(function(){
+
+        var roleId = $("#roleId").val();
+
         $.ajax({
             url:"/rolePermission/tree",
             type:"get",
             data:{
-                roleId:1
+                roleId:roleId
             },
             success:function(zNodes){
                 console.log(zNodes);
@@ -99,7 +102,7 @@
         $.ajax({
             url:"/rolePermission/",
             type:"post",
-            sync:false,
+            async:false,
             data:JSON.stringify(param),
             contentType: "application/json",
             success:function(data){
@@ -108,7 +111,6 @@
                }
             }
         })
-
        return flag;
     }
 

@@ -249,13 +249,23 @@
                 shadeClose: true,
                 shade: 0.8,
                 area: ['60%', '65%'],
-                content: '/userRole/view/' + id //iframe的url
+                content: '/rolePermission/view/' + id //iframe的url
                 ,btn: ['确定', '取消']
                 ,yes: function(index, layero){
                     var body = layer.getChildFrame('body', index);
                     var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
-                    iframeWin.doSelect();//调用子页面的方法，得到子页面返回的ids
-                    //layer.close(index);//需要手动关闭窗口
+                    var flag = iframeWin.doSelect();//调用子页面的方法，得到是否成功的标志
+                    layer.close(index);//需要手动关闭窗口
+                    if(flag){
+                        swal({
+                            icon: "success"
+                        });
+                    } else {
+                        swal({
+                            icon:"error"
+                        })
+                    }
+
                 }
                 ,btn2: function(index, layero){
                     layer.close(index)

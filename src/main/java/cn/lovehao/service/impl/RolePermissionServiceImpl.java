@@ -17,11 +17,13 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Transactional
     @Override
     public boolean addPermissions(RolePermissionDto rolePermissionDto) throws RuntimeException {
-         rolePermissionMapper.deleteByRoleId(rolePermissionDto.getRoleId());
-         if(rolePermissionDto.getRoleId() == 1){
-             throw new RuntimeException("111");
-         }
-        rolePermissionMapper.insertBatch(rolePermissionDto);
+        rolePermissionMapper.deleteByRoleId(rolePermissionDto.getRoleId());
+        if(rolePermissionDto.getPermissions().size() <= 0){
+            return true;
+        }
+        if(rolePermissionMapper.insertBatch(rolePermissionDto) > 0){
+            return true;
+        }
         return false;
     }
 }
