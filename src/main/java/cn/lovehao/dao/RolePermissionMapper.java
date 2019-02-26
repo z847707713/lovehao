@@ -18,6 +18,6 @@ public interface RolePermissionMapper {
 
     int insertBatch(RolePermissionDto rolePermissionDto);
 
-    int deleteByRoleId(RolePermission record);
+    int deleteByRoleId(Integer roleId);
 
 }

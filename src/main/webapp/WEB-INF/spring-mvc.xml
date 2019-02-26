@@ -6,7 +6,7 @@
 
     <!--  配置自动扫描的包,只包含Contrller 注解 -->
 
-    <context:component-scan base-package="cn.lovehao">
+    <context:component-scan base-package="cn.lovehao.controller">
         <context:include-filter type="annotation"
                  expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>

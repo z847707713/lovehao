@@ -11,6 +11,5 @@
     </context:component-scan>
 
     <import resource="spring-dao.xml"/>
-    
 
 </beans>

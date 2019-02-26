@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -44,7 +44,7 @@
         <!-- 扫描entity包 使用别名,多个包可以用;号隔开 -->
         <property name="typeAliasesPackage" value="com.fee.entity" />
         <!-- 扫描sql配置文件:mapper需要的文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*" />
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
     </bean>
 
     <!-- 配置扫描Dao接口包,动态实现Dao接口,注入到spring容器中 -->
@@ -54,5 +54,13 @@
         <!-- 扫描Dao接口包 -->
         <property name="basePackage" value="cn.lovehao.dao" />
     </bean>
+
+    <!-- 配置spring的PlatformTransactionManager，名字为默认值 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 开启事务控制的注解支持 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>
