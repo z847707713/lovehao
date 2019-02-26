@@ -241,6 +241,28 @@
             })
         });
 
+        $(".distBtn").click(function(){
+            var id = $(this).parent().parent().children(":first").html();
+            layer.open({
+                type: 2,
+                title: '角色编辑',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['60%', '65%'],
+                content: '/userRole/view/' + id //iframe的url
+                ,btn: ['确定', '取消']
+                ,yes: function(index, layero){
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+                    iframeWin.doSelect();//调用子页面的方法，得到子页面返回的ids
+                    //layer.close(index);//需要手动关闭窗口
+                }
+                ,btn2: function(index, layero){
+                    layer.close(index)
+                }
+            });
+        });
+
     }
 
 
@@ -269,8 +291,10 @@
                 '                        <td>' + data[i].createTime+ '</td>' +
                 '                        <td>' +data[i].updateUser + '</td>' +
                 '                        <td>' +data[i].updateTime + '</td>' +
-                '                        <td>' + '<a class="editBtn" href="#">修改</a>' +
+                '                        <td>' + '<a class="distBtn" href="#">分配权限</a>' +
+                '                                <a class="editBtn" href="#">修改</a>' +
                 '                                <a class="deleteBtn" href="#">删除</a>' + '</td>' +
+
                 '                    </tr>');
         }
         bindEvent();

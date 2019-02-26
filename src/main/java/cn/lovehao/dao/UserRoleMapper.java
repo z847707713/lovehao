@@ -16,4 +16,8 @@ public interface UserRoleMapper {
 
     int updateByPrimaryKey(UserRole record);
 
+    int deleteByRoleId(UserRole record);
+
+    //int insertBatch(UserRoleDto userRoleDto);
+
 }

@@ -19,6 +19,7 @@
     delete from user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByRoleId"></delete>
   <insert id="insert" parameterType="cn.lovehao.entity.UserRole">
     insert into user_role (id, user_id, role_id
       )
@@ -50,6 +51,7 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertBatch"></insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.lovehao.entity.UserRole">
     update user_role
     <set>

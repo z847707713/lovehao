@@ -6,13 +6,16 @@
     <result column="permission" jdbcType="VARCHAR" property="permission" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="permission_desc" jdbcType="VARCHAR" property="permissionDesc" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="parent" jdbcType="INTEGER" property="parent" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, permission, permission_name, permission_desc, create_time, create_user, update_time, 
+    id, permission, permission_name, permission_desc,url,type,parent, create_time, create_user, update_time,
     update_user
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -114,16 +117,24 @@
     </where>
   </select>
 
+  <select id="selectPermissionForZTree" resultType="cn.lovehao.entity.PermissionForZTree">
+    select id,
+    permission_name name,
+    parent pId,
+    (select count(*) from role_permission rp where rp.permission_id = permission.id and rp.role_id = #{roleId}) as checked
+    from permission
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.lovehao.entity.Permission">
     insert into permission (id, permission, permission_name, 
-      permission_desc, create_time, create_user, 
+      permission_desc,parent,url,type, create_time, create_user,
       update_time, update_user)
     values (#{id,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
-      #{permissionDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
+      #{permissionDesc,jdbcType=VARCHAR},#{parent,jdbcType=INTEGER},#{url,jdbcType=VARCHAR},#{type,jdbcType=BOOLEAN},#{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
       #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lovehao.entity.Permission">
@@ -140,6 +151,15 @@
       </if>
       <if test="permissionDesc != null">
         permission_desc,
+      </if>
+      <if test="parent != null ">
+        parent,
+      </if>
+      <if test="url != null and url != ''">
+        url,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="createTime != null">
         create_time,
@@ -167,6 +187,15 @@
       <if test="permissionDesc != null">
         #{permissionDesc,jdbcType=VARCHAR},
       </if>
+      <if test="parent != null ">
+        #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="url != null and url != ''">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BOOLEAN},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -193,6 +222,15 @@
       <if test="permissionDesc != null">
         permission_desc = #{permissionDesc,jdbcType=VARCHAR},
       </if>
+      <if test="parent != null ">
+       parent = #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="url != null and url != ''">
+       url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+       type =  #{type,jdbcType=BOOLEAN},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -213,6 +251,9 @@
     set permission = #{permission,jdbcType=VARCHAR},
       permission_name = #{permissionName,jdbcType=VARCHAR},
       permission_desc = #{permissionDesc,jdbcType=VARCHAR},
+      parent = #{parent,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      type =  #{type,jdbcType=BOOLEAN},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

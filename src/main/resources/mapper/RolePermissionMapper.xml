@@ -19,6 +19,11 @@
     delete from role_permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByRoleId">
+     delete from role_permission where role_id = #{roleId}
+  </delete>
+
   <insert id="insert" parameterType="cn.lovehao.entity.RolePermission">
     insert into role_permission (id, role_id, permission_id
       )
@@ -50,7 +55,20 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.lovehao.entity.RolePermission">
+
+    <insert id="insertBatch">
+        insert into role_permission
+        (
+           role_id,
+           permission_id
+         ) values
+        <foreach collection="permissions" item="i" separator=",">
+          (#{roleId},
+             #{i})
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.lovehao.entity.RolePermission">
     update role_permission
     <set>
       <if test="roleId != null">
