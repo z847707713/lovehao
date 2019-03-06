@@ -1,6 +1,6 @@
 package cn.lovehao.entity;
 
-public class PermissionForZTree {
+public class ZTreeData {
 
     private Integer id;
 
@@ -50,7 +50,7 @@ public class PermissionForZTree {
 
     @Override
     public String toString() {
-        return "PermissionForZTree{" +
+        return "ZTreeData{" +
                 "id=" + id +
                 ", pId=" + pId +
                 ", name='" + name + '\'' +

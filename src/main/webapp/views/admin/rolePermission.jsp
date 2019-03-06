@@ -96,8 +96,8 @@
         console.log(ids);
         var roleId = $("#roleId").val();
         var param = {
-            roleId:roleId,
-            permissions:ids
+            id:roleId,
+            ids:ids
         }
         $.ajax({
             url:"/rolePermission/",

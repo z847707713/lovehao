@@ -19,8 +19,12 @@
     delete from user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByRoleId"></delete>
-  <insert id="insert" parameterType="cn.lovehao.entity.UserRole">
+
+    <delete id="deleteByUserId">
+        delete from user_role
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="cn.lovehao.entity.UserRole">
     insert into user_role (id, user_id, role_id
       )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
@@ -51,7 +55,22 @@
       </if>
     </trim>
   </insert>
-  <insert id="insertBatch"></insert>
+
+  <insert id="insertBatch">
+    <if test="ids != null and ids.size() > 0">
+      insert into user_role
+      (
+      user_id,
+      role_id
+      ) values
+      <foreach collection="ids" item="i" separator=",">
+      (#{id},
+      #{i})
+      </foreach>
+    </if>
+  </insert>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="cn.lovehao.entity.UserRole">
     update user_role
     <set>

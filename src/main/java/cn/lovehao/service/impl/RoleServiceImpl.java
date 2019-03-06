@@ -6,12 +6,14 @@ import cn.lovehao.dto.Page;
 import cn.lovehao.dto.RoleDto;
 import cn.lovehao.entity.Role;
 import cn.lovehao.entity.User;
+import cn.lovehao.entity.ZTreeData;
 import cn.lovehao.service.RoleService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -103,5 +105,9 @@ public class RoleServiceImpl implements RoleService {
         return false;
     }
 
+    @Override
+    public List<ZTreeData> getZTreeDataByRoleId(Integer id) {
+        return roleMapper.selectRolesForZTree(id);
+    }
 
 }

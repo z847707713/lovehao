@@ -5,7 +5,7 @@ import cn.lovehao.dao.PermissionMapper;
 import cn.lovehao.dto.Page;
 import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
-import cn.lovehao.entity.PermissionForZTree;
+import cn.lovehao.entity.ZTreeData;
 import cn.lovehao.service.PermissionService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +105,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<PermissionForZTree> getPermissionsForZTree(Integer roleId) {
+    public List<ZTreeData> getPermissionsForZTree(Integer roleId) {
         return permissionMapper.selectPermissionForZTree(roleId);
     }
 

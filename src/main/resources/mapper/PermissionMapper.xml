@@ -117,7 +117,7 @@
     </where>
   </select>
 
-  <select id="selectPermissionForZTree" resultType="cn.lovehao.entity.PermissionForZTree">
+  <select id="selectPermissionForZTree" resultType="cn.lovehao.entity.ZTreeData">
     select id,
     permission_name name,
     parent pId,

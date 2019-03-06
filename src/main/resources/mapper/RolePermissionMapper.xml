@@ -62,8 +62,8 @@
            role_id,
            permission_id
          ) values
-        <foreach collection="permissions" item="i" separator=",">
-          (#{roleId},
+        <foreach collection="ids" item="i" separator=",">
+          (#{id},
              #{i})
         </foreach>
     </insert>

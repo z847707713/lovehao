@@ -5,7 +5,9 @@ import cn.lovehao.dto.RoleDto;
 import cn.lovehao.entity.Permission;
 import cn.lovehao.entity.Role;
 import cn.lovehao.entity.User;
+import cn.lovehao.entity.ZTreeData;
 
+import java.util.List;
 import java.util.Set;
 
 public interface RoleMapper {
@@ -27,5 +29,8 @@ public interface RoleMapper {
     Page<Role> selectAllRoles(RoleDto roleDto);
 
     Integer selectCount(RoleDto roleDto);
+
+    List<ZTreeData> selectRolesForZTree(Integer roleId);
+
 
 }

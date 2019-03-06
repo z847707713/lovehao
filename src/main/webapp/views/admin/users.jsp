@@ -92,20 +92,18 @@
                 content: '/user' //iframe的url
                 ,btn: ['确定', '取消']
                 ,yes: function(index, layero){
-                    var formdata = layer.getChildFrame('#formData',index);
-                    var data = formdata.serializeObject();
-                    $.ajax({
-                        url:"/user",
-                        type:"POST",
-                        data:data,
-                        success:function(result){
-                            console.log(result);
-                            if(result.code == 1){
-                                loadPage(getCurrentPage());
-                                layer.close(index);
-                            }
-                        }
-                    })
+                    var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+                    var flag = iframeWin.submit();//调用子页面的方法，得到是否成功的标志
+                    console.log(flag);
+                    if(flag){
+                        layer.close(index);
+                        swal({
+                            icon: "success"
+                        });
+                    } else {
+                        return;
+                    }
+                    loadPage(getCurrentPage());
                 }
                 ,btn2: function(index, layero){
                     layer.close(index)
@@ -182,6 +180,42 @@
 
     //绑定点击事件
     function bindEvent(){
+
+
+        $(".distBtn").click(function(){
+            var id = $(this).parent().parent().children(":first").html();
+
+            layer.open({
+                type: 2,
+                title: '分配角色',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['60%', '65%'],
+                content: '/userRole/view/' + id //iframe的url
+                ,btn: ['确定', '取消']
+                ,yes: function(index, layero){
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+                    var flag = iframeWin.doSelect();//调用子页面的方法，得到是否成功的标志
+                    layer.close(index);//需要手动关闭窗口
+                    if(flag){
+                        swal({
+                            icon: "success"
+                        });
+                    } else {
+                        swal({
+                            icon:"error"
+                        })
+                    }
+                }
+                ,btn2: function(index, layero){
+                    layer.close(index)
+                }
+            });
+
+        });
+
+
         $('.deleteBtn').click(function(){
             var id = $(this).parent().parent().children(":first").html();
             swal({
@@ -219,21 +253,20 @@
                     content: '/user/' + id //iframe的url
                     ,btn: ['确定', '取消']
                     ,yes: function(index, layero){
-                        var formdata = layer.getChildFrame('#formData',index);
-                        var data = formdata.serializeObject();
-                        data._method = 'PUT';
-                        $.ajax({
-                            url:"/user",
-                            type:"POST",
-                            data:data,
-                            success:function(result){
-                                console.log(result);
-                                if(result.code == 1){
-                                    loadPage(getCurrentPage());
-                                    layer.close(index);
-                                }
-                            }
-                        })
+                        var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+                        var flag = iframeWin.submit();//调用子页面的方法，得到是否成功的标志
+                        if(flag){
+                            layer.close(index);
+                            swal({
+                                icon: "success"
+                            });
+                        } else {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+
+                        loadPage(getCurrentPage());
                     }
                     ,btn2: function(index, layero){
                         layer.close(index)
@@ -255,7 +288,6 @@
                 '                        <th>ID</th>' +
                 '                        <th>用户名</th>' +
                 '                        <th>email</th>' +
-                '                        <th>权限描述</th>' +
                 '                        <th>操作</th>' +
                 '                </tr>')
         }
@@ -263,9 +295,9 @@
             $("#tbody").append('<tr>' +
                 '                        <td>'+ data[i].id +'</td>' +
                 '                        <td class="text-nowrap">' + data[i].username + '</td>' +
-                '                        <td ><a class="wordlimit">'+ data[i].email +'</a></td>' +
-                '                        <td><a class="wordlimit">'+ data[i].userDesc +'</a></td>' +
-                '                        <td>' + '<a class="editBtn" href="#">修改</a>' +
+                '                        <td ><a>'+ data[i].email +'</a></td>' +
+                '                        <td>' + '<a class="distBtn" href="#">分配角色</a>' +
+                '                                 <a class="editBtn" href="#">修改</a>' +
                 '                                <a class="deleteBtn" href="#">删除</a>' + '</td>' +
                 '                </tr>');
         }

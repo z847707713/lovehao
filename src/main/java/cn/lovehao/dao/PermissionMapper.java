@@ -3,7 +3,7 @@ package cn.lovehao.dao;
 import cn.lovehao.dto.Page;
 import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
-import cn.lovehao.entity.PermissionForZTree;
+import cn.lovehao.entity.ZTreeData;
 
 import java.util.List;
 import java.util.Set;
@@ -32,7 +32,7 @@ public interface PermissionMapper {
 
     Integer selectCount(PermissionDto permissionDto);
 
-    List<PermissionForZTree> selectPermissionForZTree(Integer roleId);
+    List<ZTreeData> selectPermissionForZTree(Integer roleId);
 
 
 }
