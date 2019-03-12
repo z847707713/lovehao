@@ -1,6 +1,6 @@
 package cn.lovehao.dao;
 
-import cn.lovehao.dto.RolePermissionDto;
+import cn.lovehao.dto.BatchForUserAndPermissionDto;
 import cn.lovehao.entity.RolePermission;
 
 public interface RolePermissionMapper {
@@ -16,7 +16,7 @@ public interface RolePermissionMapper {
 
     int updateByPrimaryKey(RolePermission record);
 
-    int insertBatch(RolePermissionDto rolePermissionDto);
+    int insertBatch(BatchForUserAndPermissionDto batchForUserAndPermissionDto);
 
     int deleteByRoleId(Integer roleId);
 

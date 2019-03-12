@@ -7,8 +7,12 @@ import cn.lovehao.entity.User;
 import cn.lovehao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,7 +24,6 @@ public class UserController {
     private final String USERS_VIEW = "admin/users";    //用户列表页面
 
     private final String ADD_EDIT_VIEW = "admin/user";  //新增或修改页面
-
     /**
      *  用户列表页
      * @return
@@ -47,12 +50,10 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/user/",method = RequestMethod.POST)
+    @ResponseBody
+    @RequestMapping(value = "/user",method = RequestMethod.POST)
     public ResponseMsg<User> add(User user){
-        if(userService.addUser(user)){
-            return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
-        }
-        return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);
+        return userService.addUser(user);
     }
 
     /**
@@ -60,7 +61,8 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "user/",method = RequestMethod.DELETE)
+    @ResponseBody
+    @RequestMapping(value = "/user",method = RequestMethod.DELETE)
     public ResponseMsg<User> delete(User user){
         if(userService.deleteUser(user)){
             return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
@@ -73,8 +75,13 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "user/",method = RequestMethod.PUT)
-    public ResponseMsg<User> edit(User user){
+    @ResponseBody
+    @RequestMapping(value = "/user",method = RequestMethod.PUT)
+    public ResponseMsg<List<FieldError>> edit(@Validated User user, BindingResult br){
+        int count = br.getErrorCount();
+        if(count > 0){
+            return new ResponseMsg<>(br.getFieldErrors(),ResponseMsg.ERROR_CODE,ResponseMsg.SUCCESS);
+        }
         if(userService.update(user)){
             return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
         }
@@ -85,12 +92,13 @@ public class UserController {
      * 添加页面
      * @return
      */
-    @RequestMapping(value = "user/",method = RequestMethod.GET)
-    public String addView(){
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    public String addView(Map<String,Object> map){
+        map.put("flag",true);
         return ADD_EDIT_VIEW;
     }
 
-    @RequestMapping(value = "user/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     public String editView(@PathVariable Integer id, Map<String,Object> map){
         User user = new User(id);
         map.put("user",userService.getUserById(user));

@@ -55,10 +55,10 @@
 
     $(document).ready(function(){
         $.ajax({
-            url:"/rolePermission/tree",
+            url:"/userRole/tree",
             type:"get",
             data:{
-                roleId:1
+                roleId:$("#roleId").val()
             },
             success:function(zNodes){
                 console.log(zNodes);
@@ -93,13 +93,13 @@
         console.log(ids);
         var roleId = $("#roleId").val();
         var param = {
-            roleId:roleId,
-            permissions:ids
+            id:roleId,
+            ids:ids
         }
         $.ajax({
-            url:"/rolePermission/",
+            url:"/userRole/",
             type:"post",
-            sync:false,
+            async:false,
             data:JSON.stringify(param),
             contentType: "application/json",
             success:function(data){
@@ -108,7 +108,6 @@
                }
             }
         })
-
        return flag;
     }
 

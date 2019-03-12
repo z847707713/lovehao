@@ -1,10 +1,13 @@
 package cn.lovehao.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
 
     private Integer id;
     private String username;
     private String password;
+    @NotEmpty(message = "email 不能为空")
     private String email;
     private Boolean deleteFlag;
     private String rememberMe;

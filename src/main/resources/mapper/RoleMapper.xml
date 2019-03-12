@@ -178,4 +178,14 @@
     </where>
   </select>
 
+
+
+    <select id="selectRolesForZTree" resultType="cn.lovehao.entity.ZTreeData">
+  select id,
+    role_name name,
+    (select 0) as pId,
+    (select count(*) from user_role ur where ur.role_id = role.id and ur.user_id = #{userId}) as checked
+    from role
+    </select>
+
 </mapper>

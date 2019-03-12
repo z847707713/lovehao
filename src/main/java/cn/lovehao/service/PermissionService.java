@@ -3,7 +3,7 @@ package cn.lovehao.service;
 import cn.lovehao.dto.Page;
 import cn.lovehao.dto.PermissionDto;
 import cn.lovehao.entity.Permission;
-import cn.lovehao.entity.PermissionForZTree;
+import cn.lovehao.entity.ZTreeData;
 
 import java.util.List;
 import java.util.Set;
@@ -26,6 +26,6 @@ public interface PermissionService {
 
    boolean addPermission(Permission permission);
 
-   List<PermissionForZTree> getPermissionsForZTree(Integer roleId);
+   List<ZTreeData> getPermissionsForZTree(Integer roleId);
 
 }

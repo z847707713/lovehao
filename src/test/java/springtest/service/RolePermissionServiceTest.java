@@ -1,6 +1,6 @@
 package springtest.service;
 
-import cn.lovehao.dto.RolePermissionDto;
+import cn.lovehao.dto.BatchForUserAndPermissionDto;
 import cn.lovehao.service.RolePermissionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,13 +23,13 @@ public class RolePermissionServiceTest {
     @Transactional
     public void addPermission(){
 
-        RolePermissionDto rolePermissionDto = new RolePermissionDto();
-        rolePermissionDto.setRoleId(1);
+        BatchForUserAndPermissionDto batchForUserAndPermissionDto = new BatchForUserAndPermissionDto();
+        batchForUserAndPermissionDto.setId(1);
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
-        rolePermissionService.addPermissions(rolePermissionDto);
+        rolePermissionService.addPermissions(batchForUserAndPermissionDto);
     }
 
 }

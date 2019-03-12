@@ -245,7 +245,7 @@
             var id = $(this).parent().parent().children(":first").html();
             layer.open({
                 type: 2,
-                title: '角色编辑',
+                title: '分配权限',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['60%', '65%'],

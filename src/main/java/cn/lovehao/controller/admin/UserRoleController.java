@@ -1,10 +1,10 @@
 package cn.lovehao.controller.admin;
 
 import cn.lovehao.dto.ResponseMsg;
-import cn.lovehao.dto.RolePermissionDto;
-import cn.lovehao.entity.PermissionForZTree;
-import cn.lovehao.service.PermissionService;
-import cn.lovehao.service.RolePermissionService;
+import cn.lovehao.dto.BatchForUserAndPermissionDto;
+import cn.lovehao.entity.ZTreeData;
+import cn.lovehao.service.RoleService;
+import cn.lovehao.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +17,11 @@ import java.util.Map;
 public class UserRoleController {
 
     @Autowired
-    PermissionService permissionService;
+    private RoleService roleService;
 
     @Autowired
-    RolePermissionService rolePermissionService;
+    private UserRoleService userRoleService;
+
 
     @RequestMapping("/view/{id}")
     public String view(@PathVariable Integer id, Map<String,Object> map){
@@ -30,17 +31,20 @@ public class UserRoleController {
 
     @ResponseBody
     @RequestMapping("/tree")
-    public List<PermissionForZTree> getTree(Integer roleId){
-        return permissionService.getPermissionsForZTree(roleId);
+    public List<ZTreeData> getTree(Integer roleId){
+        return roleService.getZTreeDataByRoleId(roleId);
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseMsg<String> distPermissions(@RequestBody RolePermissionDto rolePermissionDto){
-        if(rolePermissionService.addPermissions(rolePermissionDto)){
+    public ResponseMsg<String> distPermissions(@RequestBody BatchForUserAndPermissionDto batchForUserAndPermissionDto){
+
+        try{
+            userRoleService.distRoles(batchForUserAndPermissionDto);
             return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
+        } catch (Exception e){
+            return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);
         }
-        return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);
     }
 
 }

@@ -1,8 +1,10 @@
-package springtest;
+package springtest.mapper;
 
-import cn.lovehao.dao.RolePermissionMapper;
+import cn.lovehao.dao.RoleMapper;
+import cn.lovehao.dao.UserRoleMapper;
 import cn.lovehao.dto.BatchForUserAndPermissionDto;
-import cn.lovehao.entity.RolePermission;
+import cn.lovehao.entity.UserRole;
+import cn.lovehao.entity.ZTreeData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +16,27 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring-context.xml")
-public class RolePermissionTest {
+public class UserRoleMapperTest {
 
     @Autowired
-    RolePermissionMapper rolePermissionMapper;
+    private UserRoleMapper userRoleMapper;
 
     @Test
-    public void insertBatch(){
-
+    public void test(){
         BatchForUserAndPermissionDto batchForUserAndPermissionDto = new BatchForUserAndPermissionDto();
         batchForUserAndPermissionDto.setId(1);
         List<Integer> list = new ArrayList<>();
-        list.add(11);
-        list.add(2);
+        list.add(1);
         batchForUserAndPermissionDto.setIds(list);
-         rolePermissionMapper.insertBatch(batchForUserAndPermissionDto);
+        userRoleMapper.insertBatch(batchForUserAndPermissionDto);
     }
 
     @Test
-    public void deleteByRoleId(){
-        RolePermission rolePermission = new RolePermission();
-        rolePermission.setRoleId(1);
-        rolePermissionMapper.deleteByRoleId(rolePermission.getRoleId());
+    public void deleteTest(){
+
+        UserRole userRole = new UserRole();
+        userRole.setUserId(1);
+        userRoleMapper.deleteByUserId(userRole.getId());
     }
 
 }

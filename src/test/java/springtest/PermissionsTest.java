@@ -2,15 +2,13 @@ package springtest;
 
 import cn.lovehao.dao.PermissionMapper;
 import cn.lovehao.entity.Permission;
-import cn.lovehao.entity.PermissionForZTree;
+import cn.lovehao.entity.ZTreeData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.sound.sampled.Line;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -94,8 +92,8 @@ public class PermissionsTest {
 
     @Test
     public void selectPermissionForZTree(){
-        List<PermissionForZTree> permissionForZTrees = permissionMapper.selectPermissionForZTree(1);
-        System.out.println(permissionForZTrees);
+        List<ZTreeData> ZTreeData = permissionMapper.selectPermissionForZTree(1);
+        System.out.println(ZTreeData);
     }
 
 }

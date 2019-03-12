@@ -1,8 +1,8 @@
 package cn.lovehao.controller.admin;
 
 import cn.lovehao.dto.ResponseMsg;
-import cn.lovehao.dto.RolePermissionDto;
-import cn.lovehao.entity.PermissionForZTree;
+import cn.lovehao.dto.BatchForUserAndPermissionDto;
+import cn.lovehao.entity.ZTreeData;
 import cn.lovehao.service.PermissionService;
 import cn.lovehao.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class RolePermissionController {
 
     @ResponseBody
     @RequestMapping("/tree")
-    public List<PermissionForZTree> getTree(Integer roleId){
+    public List<ZTreeData> getTree(Integer roleId){
         return permissionService.getPermissionsForZTree(roleId);
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseMsg<String> distPermissions(@RequestBody RolePermissionDto rolePermissionDto){
-        if(rolePermissionService.addPermissions(rolePermissionDto)){
+    public ResponseMsg<String> distPermissions(@RequestBody BatchForUserAndPermissionDto batchForUserAndPermissionDto){
+        if(rolePermissionService.addPermissions(batchForUserAndPermissionDto)){
             return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
         }
         return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);

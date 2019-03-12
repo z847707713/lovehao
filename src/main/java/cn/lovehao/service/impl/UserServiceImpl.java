@@ -1,7 +1,9 @@
 package cn.lovehao.service.impl;
 
+import cn.lovehao.Utils.MD5Util;
 import cn.lovehao.dao.UserMapper;
 import cn.lovehao.dto.Page;
+import cn.lovehao.dto.ResponseMsg;
 import cn.lovehao.dto.UserDto;
 import cn.lovehao.entity.User;
 import cn.lovehao.service.UserService;
@@ -15,15 +17,22 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public boolean addUser(User user) {
-        try{
-          if(userMapper.insert(user) > 0){
-              return true;
-          }
-        } catch (Exception e){
-            e.printStackTrace();
+    public ResponseMsg<User> addUser(User user) {
+        if(userMapper.selectByName(user) != null){
+            return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,"用户名重复");
         }
-        return false;
+        if(user != null){
+            user.setDeleteFlag(false);
+            user.setPassword(MD5Util.getMD5(user.getUsername(),user.getPassword()));
+            try{
+                if(userMapper.insert(user) > 0){
+                    return new ResponseMsg<>(null,ResponseMsg.SUCCESS_CODE,ResponseMsg.SUCCESS);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return new ResponseMsg<>(null,ResponseMsg.ERROR_CODE,ResponseMsg.ERROR);
     }
 
     @Override
