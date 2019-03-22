@@ -22,6 +22,14 @@
 
 
     <script src="/common/plugin/edit.md/editormd.js"></script>
+    <script src="/common/js/serialize.js"></script>
+
+    <!-- SweetAlert 对话框 -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script type="text/javascript"></script>
+
+
+
 </head>
 

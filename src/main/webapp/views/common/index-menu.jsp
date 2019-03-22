@@ -24,8 +24,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="layouts-fixed-sidebar.html" class="nav-link">
-                                <i class="icon icon-target"></i> Fixed Sidebar
+                            <a href="/blog/list" class="nav-link">
+                                <i class="icon icon-target"></i> 博客列表
                             </a>
                         </li>
 

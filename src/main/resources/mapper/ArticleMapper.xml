@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lovehao.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="cn.lovehao.entity.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="article_class" jdbcType="INTEGER" property="articleClass" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="page_view" jdbcType="INTEGER" property="pageView" />
+    <result column="outline" jdbcType="VARCHAR" property="outline" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="theme" jdbcType="INTEGER" property="theme" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.lovehao.entity.Article">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="markdown" jdbcType="LONGVARCHAR" property="markdown" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, article_class, author, page_view, outline, create_time, create_user, update_time, 
+    update_user, theme,markdown
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <resultMap id="articleDto" extends="ResultMapWithBLOBs" type="cn.lovehao.dto.ArticleDto">
+         <association property="articlePhoto" column="id" select="cn.lovehao.dao.ArticlePhotoMapper.selectByArticleId" ></association>
+  </resultMap>
+
+
+  <select id="selectAll" resultMap="articleDto">
+       select a.id,
+               title,
+               page_view,
+               outline,
+               create_time,
+               create_user,
+               update_time,
+               update_user,
+               theme
+        from article a
+        <where>
+           <if test="title != null and title != ''">
+              title like CONCAT("%",#{title},"%")
+           </if>
+           <if test="theme != null">
+              and theme = #{theme}
+           </if>
+        </where>
+
+  </select>
+
+  <select id="selectArticleAndPhoto" resultMap="articleDto">
+       select a.id,
+               title,
+               page_view,
+               outline,
+               create_time,
+               create_user,
+               update_time,
+               update_user,
+               theme
+        from article a
+        where id = #{id}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.lovehao.entity.Article">
+    insert into article (id, title, article_class, 
+      author, page_view, outline, 
+      create_time, create_user, update_time, 
+      update_user, theme, content,markdown
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{articleClass,jdbcType=INTEGER}, 
+      #{author,jdbcType=VARCHAR}, #{pageView,jdbcType=INTEGER}, #{outline,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{theme,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR},
+      #{markdown,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="cn.lovehao.entity.Article" useGeneratedKeys="true" keyProperty="id">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="articleClass != null">
+        article_class,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="pageView != null">
+        page_view,
+      </if>
+      <if test="outline != null">
+        outline,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="theme != null">
+        theme,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="markdown != null">
+        markdown,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleClass != null">
+        #{articleClass,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="pageView != null">
+        #{pageView,jdbcType=INTEGER},
+      </if>
+      <if test="outline != null">
+        #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null">
+        #{theme,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="markdown != null">
+        #{markdown,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lovehao.entity.Article">
+    update article
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleClass != null">
+        article_class = #{articleClass,jdbcType=INTEGER},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="pageView != null">
+        page_view = #{pageView,jdbcType=INTEGER},
+      </if>
+      <if test="outline != null">
+        outline = #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null">
+        theme = #{theme,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="markdown != null">
+        markdown = #{markdown,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.lovehao.entity.Article">
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      article_class = #{articleClass,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      page_view = #{pageView,jdbcType=INTEGER},
+      outline = #{outline,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      theme = #{theme,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+      markdown =  #{markdown,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lovehao.entity.Article">
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      article_class = #{articleClass,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      page_view = #{pageView,jdbcType=INTEGER},
+      outline = #{outline,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      theme = #{theme,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

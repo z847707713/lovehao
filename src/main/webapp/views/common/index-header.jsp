@@ -16,7 +16,7 @@
 
 
     <!-- jquery -->
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
     <script src="/common/vendor/popper.js/popper.min.js"></script>
     <script src="/common/vendor/bootstrap/js/bootstrap.min.js"></script>
