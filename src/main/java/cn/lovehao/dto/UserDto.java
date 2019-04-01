@@ -1,6 +1,6 @@
-package cn.lovehao.entity;
+package cn.lovehao.dto;
 
-public class User {
+public class UserDto extends PageBase {
 
     private Integer id;
     private String username;
@@ -9,14 +9,10 @@ public class User {
     private Boolean deleteFlag;
     private String rememberMe;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(Integer id) {
-      this.id = id;
-    }
-
-    public User(String username) {
+    public UserDto(String username) {
         this.username = username;
     }
 
@@ -24,7 +20,7 @@ public class User {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,15 +65,4 @@ public class User {
     }
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", deleteFlag=" + deleteFlag +
-                ", rememberMe='" + rememberMe + '\'' +
-                '}';
-    }
 }

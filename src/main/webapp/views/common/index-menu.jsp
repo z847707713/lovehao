@@ -127,6 +127,13 @@
                     </a>
 
                     <ul class="nav-dropdown-items">
+
+                        <li class="nav-item">
+                            <a href="/users" class="nav-link">
+                                <i class="icon icon-umbrella"></i> 用户管理
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="/roles" class="nav-link">
                                 <i class="icon icon-umbrella"></i> 角色管理

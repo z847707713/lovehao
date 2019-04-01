@@ -24,4 +24,11 @@ public class Page<T> {
         this.totalPage = totalPage;
     }
 
+    @Override
+    public String toString() {
+        return "Page{" +
+                "data=" + data +
+                ", totalPage=" + totalPage +
+                '}';
+    }
 }

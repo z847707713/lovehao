@@ -27,11 +27,81 @@
         </if>
     </update>
 
+
+    <update id="update">
+        UPDATE user
+        <set>
+            <if test="username != null and username!= ''">
+               username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+               email = #{email},
+            </if>
+            <if test="deleteFlag != null ">
+                delete_flag = #{deleteFlag}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
     <select id="selectById" resultType="cn.lovehao.entity.User">
          select * from user where id = #{id}
     </select>
 
     <select id="selectByName" resultType="cn.lovehao.entity.User">
         select * from user where username = #{username}
+    </select>
+
+    <select id="selectAllUsers" resultType="cn.lovehao.entity.User">
+        select
+          id,
+          username,
+          email,
+          delete_flag
+        from user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null and username!= ''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="password != null and password != ''">
+                and password like concat('%',#{password},'%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like  concat('%',#{email},'%')
+            </if>
+            <if test="deleteFlag != null ">
+                and delete_flag like concat('%',#{deleteFlag},'%')
+            </if>
+        </where>
+        LIMIT ${(currentPage - 1) * pageShowCount },${pageShowCount}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select
+        (CEILING(count(*) / ${pageShowCount})) totalPage
+        from user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null and username!= ''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="password != null and password != ''">
+                and password like concat('%',#{password},'%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like  concat('%',#{email},'%')
+            </if>
+            <if test="deleteFlag != null ">
+                and delete_flag like concat('%',#{deleteFlag},'%')
+            </if>
+        </where>
     </select>
 </mapper>
